@@ -1,5 +1,7 @@
+*~
 *.pyc
 *.pyo
 .idea/
 venv/ 
 __pycache__
+
