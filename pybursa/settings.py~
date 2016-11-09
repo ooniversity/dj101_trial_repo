@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 Django settings for pybursa project.
 
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'quadratic.apps.PollsConfig',
 ]
 
 MIDDLEWARE = [
@@ -121,5 +124,4 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),  # pybursa; static assets that aren’t tied to a particular app
-    '/var/www/static/',
 ]
