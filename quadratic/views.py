@@ -24,12 +24,12 @@ def quadratic_results(request):
 	        elif d == 0:
 		        result = "Дискриминант равен нулю, квадратное уравнение имеет один действительный корень: x1 = x2 = %0.1f" % (-b / 2 * a)
 
-        else:
-            x1 = (-b + d ** (1/2.0)) / (2 * a)
-            x2 = (-b - d ** (1/2.0)) / (2 * a)
-            result = "Квадратное уравнение имеет два действительных корня: x1 = %0.1f, x2 = %0.1f" % (x1, x2)
+            else:
+                x1 = (-b + d ** (1/2.0)) / (2 * a)
+                x2 = (-b - d ** (1/2.0)) / (2 * a)
+                result = "Квадратное уравнение имеет два действительных корня: x1 = %0.1f, x2 = %0.1f" % (x1, x2)
 
-        context.update({ 'd' : d, 'result' : result })
+            context.update({ 'd' : d, 'result' : result })
 
     else:
         form = QuadraticForm()
