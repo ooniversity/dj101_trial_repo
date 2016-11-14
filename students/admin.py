@@ -20,4 +20,5 @@ class StudentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Student, StudentAdmin)
+admin.site.site_header = 'PyBursa Administration'
 
