@@ -1,109 +1,67 @@
 <!DOCTYPE html>
-{% load staticfiles %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <title>Students</title>
 
-    <title>Студенты - pyBursa</title>
+    <!-- Bootstrap -->
+    {% load static %}
+    <link href="{% static 'css/style.css'%}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css'%}" rel="stylesheet">
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- Bootstrap theme -->
-    <link href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/theme.css' %}" rel="stylesheet">
   </head>
+  <body>
+ 
+<div class="container">
+     <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">       
+          <li><a href="{% url 'index'%}">Main</a></li>
+          <li><a href="{% url 'contact'%}">Contacts</a></li>
+          <li><a href="{% url 'student_list'%}">Students</a></li>      
+         </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+      
+  <div class="container">
+     <h1>Студенты курса PyBursa</h1>
+     <p>Группа №5 </p>
+    <table class="student_list">
+      <tr><td>No</td><td>Surname</td><td>Name</td><td>Address</td><td>Skype</td></tr>
+      <tr><td><a href="{% url 'student_detail'%}">1</a> </td><td>Акимова</td><td>Татьяна</td><td>г. Харьков, ул. Краснодарская, д. 53, кв 24</td><td>akimova</td></tr>
+      <tr><td>2</td><td>Бублик</td><td>Лена</td><td>г. Харьков, ул. Иванова, д. 34, кв 44</td><td>bublik</td></tr>
+      <tr><td>3</td><td>Баранов</td><td>Сергей</td><td>г. Харьков, ул. Сумская, д. 63, кв 24</td><td>baranov</td></tr>
+      <tr><td>4</td><td>Гусева</td><td>Наталья</td><td>г. Харьков, ул. 23 августа, д. 34, кв 24</td><td>gus</td></tr>
+      <tr><td>5</td><td>Иванов</td><td>Иван</td><td>г. Харьков, ул. Мира, д. 1, кв 114</td><td>iivanov</td></tr>
+      <tr><td>6</td><td>Куприн</td><td>Вадим</td><td>г. Харьков, пр. Науки , д. 333, кв 124</td><td>kuprin</td></tr>
+      <tr><td>7</td><td>Петров</td><td>Петр</td><td>г. Харьков, ул. Бакулина, д. 5, кв 14</td><td>petr</td></tr>
+      <tr><td>8</td><td>Федоров</td><td>Федор</td><td>г. Харьков, ул. Блюхера, д. 65-б, кв 4</td><td>fedfed</td></tr>
 
-  <body role="document">
+  </table>
 
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{% url 'index' %}">
-            <img class="logo" src="{% static 'img/logo.png' %}" />
-          </a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="{% url 'index' %}">Главная</a></li>
-            <li><a href="{% url 'contact' %}">Контакты</a></li>
-            <li><a href="{% url 'student_list' %}">Студенты</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+  </div>
 
-    <div class="container theme-showcase" role="main">
+   
 
-      <div class="page-header">
-        <h2>Список студентов</h2>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Surname Name</th>
-                <th>Address</th>
-                <th>Skype</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td><a href="{% url 'student_detail' %}">Петров Петр</a></td>
-                <td>Харьков ул.Петровского 12</td>
-                <td>pety.pety</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td><a href="{% url 'student_detail' %}">Иванов Иван</a></td>
-                <td>Харьков ул.Иванова 34</td>
-                <td>vano.vano</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td><a href="{% url 'student_detail' %}">Сидорова Ира</a></td>
-                <td>Киев ул.Сидорова 37</td>
-                <td>ira.ira</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td><a href="{% url 'student_detail' %}">Бондаренко Екатерина</a></td>
-                <td>Харьков ул.Сумская 101</td>
-                <td>katy.katy</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td><a href="{% url 'student_detail' %}">Бондаренко Сергей</a></td>
-                <td>Харьков ул.Сумская 101</td>
-                <td>sergey.sergey</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-    </div> <!-- /container -->
+ <footer class="footer">
+    <p>&copy; 2016 Company, Inc.</p>
+  </footer>
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+   
+</div>
+
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
   </body>
 </html>

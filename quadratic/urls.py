@@ -1,8 +1,8 @@
 from django.conf.urls import url
+from . import views
+from .views import quadratic_results
 
-from quadratic import views
-
+app_name = 'quadratic'
 urlpatterns = [
-    url(r'results/$', views.quadratic_results, name='results'),
+url(r'results/$', views.quadratic_results, name='results'),
 ]
-

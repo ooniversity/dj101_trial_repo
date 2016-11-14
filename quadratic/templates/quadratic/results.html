@@ -1,22 +1,63 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Basic page for Django course">
-    <meta name="author" content="Ivan Tarasenko">
-    <title>PyBursa Quadratic</title>
-  </head>
-  <body>
-    <p>Квадратное уравнение a*x*x + b*x + c = 0</p>
-    <form method="get">
-    {{ form.as_p }}
-    <input type="submit" value="Решить"/>
-    </form>
-    {% if result %}
-    <p>Дискриминант: {{ d }}</p>
-    <p>{{ result }}</p>
-    {% endif %}
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Решение квадратного уравнения</title>
+</head>
+<body>
+
+<p>Квадратное уравнение a*x*x + b*x + c = 0</p> 
+
+    <ul>
+        <li>a = {{a}}</li>
+	        {% if a == "0" %}
+	           <p> коэффициент при первом слагаемом уравнения не может быть равным нулю </p>
+	        {% endif %}
+	        {% if a == "" %}
+	           <p>коэффициент не определен</p>
+	        {% endif %}
+	        {% if mes_a == 'коэффициент не целое число' %}
+	           <p>коэффициент не целое число</p>
+	        {% endif %}
+      
+        <li>b = {{b}}</li>
+	        {% if b == "" %}
+	           <p>коэффициент не определен</p>
+	        {% endif %}
+	        {% if mes_b == 'коэффициент не целое число' %}
+	           <p>коэффициент не целое число</p>
+	        {% endif %}
+        <li>c = {{c}}</li>
+            {% if c == "" %}
+               <p>коэффициент не определен</p>
+            {% endif %}
+            {% if mes_c == 'коэффициент не целое число' %}
+               <p>коэффициент не целое число</p>
+            {% endif %}
+   </ul>
+    
+
+    {% if ch == 0 %}     
+	    {% if discr < 0 %}
+		    <p>Дискриминант: {{discr}} </p>
+		    <p>Дискриминант меньше нуля, квадратное уравнение не имеет действительных решений.</p>
+	    {% endif %}
+	    
+	    {% if discr > 0 %}
+		    <p>Дискриминант: {{discr}} </p>
+		    <p>Квадратное уравнение имеет два действительных корня: x1 = {{x1}}, x2 = {{x2}}</p>
+	    {% endif %}
+	    
+	    {% if discr == 0 %}
+		    <p>Дискриминант: {{discr}} </p>
+		    <p>Дискриминант равен нулю, квадратное уравнение имеет один действительный корень: x1 = x2 = {{x1}}</p>
+	    {% endif %}
+     {% endif %}
+  
+</body>
 </html>
+
+
+
+
