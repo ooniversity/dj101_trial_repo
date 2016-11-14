@@ -1,97 +1,107 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
   <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Contacts</title>
-    {% load static %}
-    <link href="{% static 'css/style.css'%}" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link href="{% static 'css/bootstrap.css'%}" rel="stylesheet">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
+    <title>Контакты - pyBursa</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet">
   </head>
-  <body>
-    
-<div class="container">
-     <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="{% url 'index'%}">Main</a></li>
-          <li><a href="{% url 'contact'%}">Contacts</a></li>
-          <li><a href="{% url 'student_list'%}">Students</a></li>
-                 
-         </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-<h1>Contacts</h1>
-<div class="media">
-  <div class="media-left">
-     <img class ="media-object" src="../static/images/1.jpg" alt="Director">
-  </div>
-  <div class="media-body">
-    <div class="contact">
-      <h2 class="media-heading"><a href="{% url 'index'%}">Director</a> 
-      </h2>
-      <p> <b>Name:</b> Ivan Ivanov</p> 
-      <p><b>Skype:</b> iivanov</p>
-      <p><b>Email:</b> iivanov@gmail.com</p> 
-      <p><b>Phone:</b> (000) 000-00-00</p>
-    </div>
-    <p>Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text </p>
-  </div>
+
+  <body role="document">
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'index' %}">
+            <img class="logo" src="{% static 'img/logo.png' %}" />
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'index' %}">Главная</a></li>
+            <li><a href="{% url 'contact' %}">Контакты</a></li>
+            <li><a href="{% url 'students:list_view' %}">Студенты</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+      <div class="jumbotron">
+        <h1>Организаторы</h1>
+
+        <div class="row">
+          <div class="col-xs-6 col-lg-6">
+            <h3>Основатель pyBursa</h3>
+            <div class="row">
+              <div class="col-xs-4 col-lg-4">
+                <img src="{% static 'img/python.jpg' %}" />
+              </div>
+              <div class="col-xs-6 col-lg-6 ">
+                <p>pyBursa@gmail.com</p>
+                <p>skype: pyBursa</p>
+                <p>+38 097 123 3 457</p>
+              </div>
+            </div>
+          </div><!--/.col-xs-6.col-lg-6-->
+
+          <div class="col-xs-6 col-lg-6">
+            <h3>Менеджер pyBursa</h3>
+            <div class="row">
+              <div class="col-xs-4 col-lg-4">
+                <img src="{% static 'img/python.jpg' %}" />
+              </div>
+              <div class="col-xs-6 col-lg-6 ">
+                <p>pyBursa@gmail.com</p>
+                <p>skype: pyBursa</p>
+                <p>+38 097 123 3 457</p>
+              </div>
+            </div>
+          </div><!--/.col-xs-6.col-lg-4-->
+
+          <div class="col-xs-6 col-lg-6">
+            <h3>Менеджер pyBursa</h3>
+            <div class="row">
+              <div class="col-xs-4 col-lg-4">
+                <img src="{% static 'img/python.jpg' %}" />
+              </div>
+              <div class="col-xs-6 col-lg-6 ">
+                <p>pyBursa@gmail.com</p>
+                <p>skype: pyBursa</p>
+                <p>+38 097 123 3 457</p>
+              </div>
+            </div>
+          </div><!--/.col-xs-6.col-lg-4-->
+        </div><!--/row-->
+      </div>
+    </div> <!-- /container -->
 
 
-</div>
-
-<div class="media">
-  <div class="media-left">
-    <img class="media-object" src="../static/images/2.jpg" alt="Manager">
-   </div>
-  <div class=" media-body">
-    
-    <div class="contact">
-      <h2 class="media-heading"><a href="{% url 'index'%}">Manager</a>  
-      </h2>
-      <p> <b>Name:</b> Ivan Ivanov</p> 
-      <p><b>Skype:</b> iivanov</p>
-      <p><b>Email:</b> iivanov@gmail.com</p> 
-      <p><b>Phone:</b> (000) 000-00-00</p>
-    </div>
-   <p>Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text </p>
-  </div>
-</div>
-
-<div class="media">
-  <div class="media-left">
-    <img class="media-object" src="../static/images/3.jpg" alt="Founder">
-  </div>
-  <div class="media-body">
-    <div class="contact">
-      <h2 class="media-heading"><a href="{% url 'index'%}">Founder</a>  
-      </h2>
-      <p> <b>Name:</b> Ivan Ivanov</p> 
-      <p><b>Skype:</b> iivanov</p>
-      <p><b>Email:</b> iivanov@gmail.com</p> 
-      <p><b>Phone:</b> (000) 000-00-00</p>
-    </div>
-    <p>Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text </p>
-   
-   </div>
-
-  <footer class="footer">
-    <p>&copy; 2016 Company, Inc.</p>
-  </footer>
-  
-</div>
-</div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   </body>
 </html>

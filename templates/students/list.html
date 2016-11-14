@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Главная - pyBursa</title>
+    <title>Студенты - pyBursa</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -39,7 +39,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="{% url 'index' %}">Главная</a></li>
+            <li><a href="{% url 'index' %}">Главная</a></li>
             <li><a href="{% url 'contact' %}">Контакты</a></li>
             <li><a href="{% url 'students:list_view' %}">Студенты</a></li>
           </ul>
@@ -49,31 +49,37 @@
 
     <div class="container theme-showcase" role="main">
 
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>ooniversity</h1>
-        <p>Мы специализируемся на «модных» языках программирования. Принципиальное наше отличие от других курсов – максимум практики и жесткая система обязательных домашних заданий.</p>
-      </div>
-
       <div class="page-header">
-        <h1>Выбирай на каком курсе ты хочешь учиться!</h1>
+        <h2>Список студентов</h2>
       </div>
       <div class="row">
         <div class="col-md-12">
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Курс</th>
-                <th>Описание</th>
+                <th>#</th>
+                <th>фамилия имя</th>
+                <th>адрес</th>
+                <th>skype</th>
+                <th>курсы</th>
               </tr>
             </thead>
             <tbody>
-              {% for course in courses %}
-                <tr>
-                  <td><a href="{% url 'courses:detail' course.id %}">{{ course.name }}</a></td>
-                  <td>{{ course.short_description }}</td>
-                </tr>
-              {% endfor %}
+
+            {% for student in students %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'students:detail' student.id %}">{{ student.surname }} {{ student.name }}</a></td>
+                <td>{{ student.address }}</td>
+                <td>{{ student.skype }}</td>
+                <td>
+                  {% for course in student.courses.all %}
+                    <p><a href="{% url 'courses:detail' course.id %}">{{ course.name }}</a></p>
+                  {% endfor %}
+                </td>
+              </tr>
+            {% endfor %}
+
             </tbody>
           </table>
         </div>
