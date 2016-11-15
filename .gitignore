@@ -1,8 +1,7 @@
-    *.pyc
-    *.pyo
-    *~
-    .idea/
-    __pycache__
-    venv/ 
-
-
+*.pyc
+*.pyo
+.idea/
+venv/ 
+__pycache__
+*~
+*.log

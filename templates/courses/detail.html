@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+
+{% block title %}Сведенья о курсе - pyBursa{% endblock %}
+
+{% block students_course %}?course_id={{ course.pk }}{% endblock %}
+
+
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+<div class="jumbotron">
+  <h1>{{ course.name }}</h1>
+  <p>{{ course.description }}</p>
+</div>
+
+<div class="page-header">
+  <h1>Преподаватели</h1>
+</div>
+  {% if course.coach %}
+    {% include "include/coach_include.html" with title="Учитель" coach=course.coach %}
+  {% endif %}
+
+  {% if course.assistant %}
+    {% include "include/coach_include.html" with title="Ассистент" coach=course.assistant %}
+  {% endif %}
+
+<div class="page-header">
+  <h1>План курса</h1>
+</div>
+
+<a href="{% url 'courses:add-lesson' course.pk %}" class="btn btn-primary" role="button">
+  <span class="glyphicon glyphicon-plus"></span>
+  Добавить занятие
+</a>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Тема</th>
+          <th>Описание</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for lesson in course.lesson_set.all %}
+          <tr>
+            <td>{{ lesson.order }}</td>
+            <td>{{ lesson.subject }}</td>
+            <td>{{ lesson.description }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}
