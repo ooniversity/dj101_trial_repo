@@ -8,6 +8,20 @@
 
 
 {% block content %}
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+<a href="{% url 'students:add' %}" class="btn btn-primary" role="button">
+  <span class="glyphicon glyphicon-plus"></span>
+  Добавить нового студента
+</a>
 <div class="page-header">
   <h2>Список студентов</h2>
 </div>
@@ -21,6 +35,8 @@
           <th>адрес</th>
           <th>skype</th>
           <th>курсы</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -34,6 +50,18 @@
               {% for course in student.courses.all %}
                 <p><a href="{% url 'courses:detail' course.id %}">{{ course.name }}</a></p>
               {% endfor %}
+            </td>
+            <td>
+              <a href="{% url 'students:edit' student.id  %}" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-pencil"></span>
+                Изменить
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'students:remove' student.id  %}" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-remove"></span>
+                Удалить
+              </a>
             </td>
           </tr>
         {% endfor %}

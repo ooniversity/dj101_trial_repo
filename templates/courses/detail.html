@@ -9,16 +9,19 @@
 {% block content %}
 <div class="jumbotron">
   <h1>{{ course.name }}</h1>
-  <p>{{ course.description|truncatechars:32 }}</p>
+  <p>{{ course.description }}</p>
 </div>
 
 <div class="page-header">
   <h1>Преподаватели</h1>
 </div>
+  {% if course.coach %}
+    {% include "include/coach_include.html" with title="Учитель" coach=course.coach %}
+  {% endif %}
 
-  {% include "include/coach_include.html" with title="Учитель" coach=course.coach %}
-
-  {% include "include/coach_include.html" with title="Ассистент" coach=course.assistant %}
+  {% if course.assistant %}
+    {% include "include/coach_include.html" with title="Ассистент" coach=course.assistant %}
+  {% endif %}
 
 <div class="page-header">
   <h1>План курса</h1>
