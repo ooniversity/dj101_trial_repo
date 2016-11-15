@@ -58,7 +58,7 @@
               </a>
             </td>
             <td>
-              <a href="{% url 'students:remove' student.pk  %}" class="btn btn-primary" role="button">
+              <a href="{% url 'students:remove' student.id  %}" class="btn btn-primary" role="button">
                 <span class="glyphicon glyphicon-remove"></span>
                 Удалить
               </a>
@@ -72,7 +72,7 @@
         <ul class="pagination">
           <li>
             {% if page_obj.has_previous %}
-              <a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+              <a href="?page={{ page_obj.previous_page_number }}" aria-label="<< previous">
                   <span aria-hidden="true">&laquo;</span>
                   previous
               </a>
@@ -93,7 +93,7 @@
           {% endfor %}
           {% if page_obj.has_next %}
           <li>
-            <a href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+            <a href="?page={{ page_obj.next_page_number }}" aria-label="next >>">
               <span aria-hidden="true">&raquo;</span>
               next
             </a>
