@@ -130,7 +130,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),  # pybursa; static assets that aren’t tied to a particular app
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static_collected")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static_collected")
 
 ADMINS = (
     ('Oksana', 'example@gmail.com'),
