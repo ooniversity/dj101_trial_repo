@@ -1,0 +1,75 @@
+#voidi {
+	color: green;
+}
+.progy {
+	color: blue;
+}
+#manager {
+	color: yellow;
+}
+#director {
+	color: violet;
+}
+#founder {
+	color: orange;
+}
+#team1 {	
+	color: blue;
+}
+#team2 {	
+	color: green;
+}
+#name p{
+	font-weight: 600;
+}
+.line {
+	text-decoration: underline;
+}
+#ts {
+	font-style: italic;
+}
+.col-lg-4 {
+	font-family: serif;
+}
+.alert {
+	font-style: italic;
+}
+.row {
+	background-color: #BAD4F6;
+}
+.alert-success {
+	font-weight: bold;	
+}
+.alert-warning {
+	font-weight: bold;
+}
+.row {
+	margin-top: 8%;
+}
+.progy {
+	margin-top: 8%;
+}
+.container {
+	background-color: #FFEBCD
+}
+ul {
+	font-family: cursive;
+}
+
+li:hover { background: #e3e3e3; }
+
+li {
+	color: brown;
+}
+div h3{
+	font-style: italic;
+}
+title {
+	font-style: italic;
+}
+.page-header {
+	font-family: arial;
+}
+.marketing {
+	background-color: #FFEBCD;
+}

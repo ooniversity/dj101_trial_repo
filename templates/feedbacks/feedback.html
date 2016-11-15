@@ -1,26 +1,29 @@
 {% extends "base.html" %}
 
-{% block nav_feedback %}active{% endblock %}
 
-{% block title %}Обратная связь{% endblock %}
+{% load staticfiles %}
+
+
+{% block title %}{{ title }}{% endblock title %}
+
+
+{% block blow_feedback %}active{% endblock blow_feedback %}
 
 
 {% block content %}
 {% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-success">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      {{ message }}
-    </div>
-  {% endfor %}
+ 
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{% for message in messages %}{{ message }}{% endfor %}</div>
 {% endif %}
-<div class="page-header">
-  <h2>{{ title }}</h2>
-</div>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Send">
-  </form>
-{% endblock content %}
-
+  <div class='container'>
+    <h3> Напишите нам! </h3>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Создать" />
+     </form>
+  </div>
+  
+{% endblock content %}  
+    

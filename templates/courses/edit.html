@@ -1,26 +1,32 @@
 {% extends "base.html" %}
 
 
-{% block title %}Редактирование курса - pyBursa{% endblock %}
+{% load staticfiles %}
+
+
+{% block title %}{{ title }}{% endblock title %}
+
+
+
 
 
 {% block content %}
-
-{% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-success">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      {{ message }}
-    </div>
-  {% endfor %}
-{% endif %}
-
-<div class="page-header">
-  <h2>{{ title }}</h2>
-</div>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Изменить">
-  </form>
-{% endblock content %}
+   <div>
+     {% if messages %}
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% for message in messages %}{{ message }}{% endfor %}
+        </div>
+    {% endif %}    
+       
+    <h3> Редактирование данных курса </h3>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Изменить" />
+     </form>
+  </div>
+  
+  
+{% endblock content %}  
+    

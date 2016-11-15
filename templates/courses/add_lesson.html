@@ -1,16 +1,24 @@
 {% extends "base.html" %}
 
 
-{% block title %}Создание занятия - pyBursa{% endblock %}
+{% load staticfiles %}
+
+
+{% block title %}Lesson create{% endblock title %}
+
+
+
 
 
 {% block content %}
-<div class="page-header">
-  <h2>{{ title }}</h2>
-</div>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Создать">
-  </form>
-{% endblock content %}
+  <div>
+    <h3> Создание нового занятия </h3>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Создать" />
+     </form>
+  </div>
+  
+{% endblock content %}  
+    

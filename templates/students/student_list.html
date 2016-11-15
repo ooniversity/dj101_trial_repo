@@ -1,107 +1,85 @@
 {% extends "base.html" %}
 
 
-{% block title %}Студенты - pyBursa{% endblock %}
+{% load staticfiles %}
 
 
-{% block nav_students %}active{% endblock %}
+{% block title %}PyStudents{% endblock title %}
+
+
+
 
 
 {% block content %}
-
-{% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-success">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      {{ message }}
-    </div>
-  {% endfor %}
-{% endif %}
-
-<a href="{% url 'students:add' %}" class="btn btn-primary" role="button">
-  <span class="glyphicon glyphicon-plus"></span>
-  Добавить нового студента
-</a>
-<div class="page-header">
-  <h2>Список студентов</h2>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>фамилия имя</th>
-          <th>адрес</th>
-          <th>skype</th>
-          <th>курсы</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for student in student_list %}
-          <tr>
-            <td>{{ forloop.counter }}</td>
-            <td><a href="{% url 'students:detail' student.pk %}">{{ student.surname }} {{ student.name }}</a></td>
-            <td>{{ student.address }}</td>
-            <td>{{ student.skype }}</td>
-            <td>
-              {% for course in student.courses.all %}
-                <p><a href="{% url 'courses:detail' course.pk %}">{{ course.name }}</a></p>
-              {% endfor %}
-            </td>
-            <td>
-              <a href="{% url 'students:edit' student.pk  %}" class="btn btn-primary" role="button">
-                <span class="glyphicon glyphicon-pencil"></span>
-                Изменить
-              </a>
-            </td>
-            <td>
-              <a href="{% url 'students:remove' student.id  %}" class="btn btn-primary" role="button">
-                <span class="glyphicon glyphicon-remove"></span>
-                Удалить
-              </a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-      <nav>
-        <ul class="pagination">
-          <li>
-            {% if page_obj.has_previous %}
-              <a href="?page={{ page_obj.previous_page_number }}" aria-label="<< previous">
-                  <span aria-hidden="true">&laquo;</span>
-                  previous
-              </a>
-            {% endif %}
-          </li>
-          {% for page in paginator.page_range %}
-
-            {% if page_obj.number == page %}
-              <li class="active">
-                <a href="#" class="disabled">{{ page }}</a>
-              </li>
-            {% else %}
-              <li>
-                <a href="?page={{ page }}" class="disabled">{{ page }}</a>
-              </li>
-            {% endif %}
-
-          {% endfor %}
-          {% if page_obj.has_next %}
-          <li>
-            <a href="?page={{ page_obj.next_page_number }}" aria-label="next >>">
-              <span aria-hidden="true">&raquo;</span>
-              next
-            </a>
-          </li>
-          {% endif %}
-        </ul>
-      </nav>
-
+  {% if messages %}
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% for message in messages %}{{ message }}{% endfor %}
+        </div>
+    {% endif %}
+  <div>
+    <button class="btn"><a href="{% url 'students:add' %}">Добавить нового студента</a></button>
   </div>
-</div>
-{% endblock content %}
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Список студентов</h1>
+
+    </div>
+  </div>
+  
+  
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Фамилия и имя</th>
+        <th>Адрес</th>
+        <th>Skype</th>
+        <th>курсы</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+    {% for student in student_list %}
+      <tr>
+        <td>{{ student.id }}</td>
+        <td><a href="{% url 'students:detail' student.id %}">{{ student.name }} {{ student.surname }}</a></td>
+        <td>{{ student.address }}</td>
+        <td>{{ student.skype }}</td>
+        <td>
+            {% for course in student.courses.all %}
+                <p><a href="{% url 'courses:detail' course.id %}">{{ course }}</a></p>
+            {% endfor %} 
+        </td>
+        <td>
+            <button class="btn"><a href="{% url 'students:edit' student.id %}">Изменить</a></button>
+        </td>
+        <td>
+            <button class="btn"><a href="{% url 'students:remove' student.id %}">Удалить</a></button>
+        </td>       
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+<nav>
+  <ul class="pagination">
+   
+        {% if page_obj.has_previous %}
+          <li><a href="?page={{ page_obj.previous_page_number }}"><< previous</a></li>
+        {% endif %}
+        {% for page in page_obj.paginator.page_range %}
+            {% if page == page_obj.number %}
+                <li class="active"><a href="?page={{ page }}">{{ page }}</a></li>
+            
+            {% else %}
+                <li class='disabled'><a href="?page={{ page }}">{{ page }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}">next >></a></li>
+        {% endif %}
+    
+  </ul>
+</nav>
+{% endblock content %}  
+    

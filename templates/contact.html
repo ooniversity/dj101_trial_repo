@@ -3,58 +3,49 @@
 {% load staticfiles %}
 
 
-{% block title %}Контакты - pyBursa{% endblock %}
+{% block title %}PyBursa contacts{% endblock title %}
 
 
-{% block nav_contact %}active{% endblock %}
+{% block blow_contact %}active{% endblock blow_contact %}
 
 
 {% block content %}
-<div class="jumbotron">
-  <h1>Организаторы</h1>
-
-  <div class="row">
-    <div class="col-xs-6 col-lg-6">
-      <h3>Основатель pyBursa</h3>
-      <div class="row">
-        <div class="col-xs-4 col-lg-4">
-          <img src="{% static 'img/python.jpg' %}" />
-        </div>
-        <div class="col-xs-6 col-lg-6 ">
-          <p>pyBursa@gmail.com</p>
-          <p>skype: pyBursa</p>
-          <p>+38 097 123 3 457</p>
-        </div>
-      </div>
-    </div><!--/.col-xs-6.col-lg-6-->
-
-    <div class="col-xs-6 col-lg-6">
-      <h3>Менеджер pyBursa</h3>
-      <div class="row">
-        <div class="col-xs-4 col-lg-4">
-          <img src="{% static 'img/python.jpg' %}" />
-        </div>
-        <div class="col-xs-6 col-lg-6 ">
-          <p>pyBursa@gmail.com</p>
-          <p>skype: pyBursa</p>
-          <p>+38 097 123 3 457</p>
-        </div>
-      </div>
-    </div><!--/.col-xs-6.col-lg-4-->
-
-    <div class="col-xs-6 col-lg-6">
-      <h3>Менеджер pyBursa</h3>
-      <div class="row">
-        <div class="col-xs-4 col-lg-4">
-          <img src="{% static 'img/python.jpg' %}" />
-        </div>
-        <div class="col-xs-6 col-lg-6 ">
-          <p>pyBursa@gmail.com</p>
-          <p>skype: pyBursa</p>
-          <p>+38 097 123 3 457</p>
-        </div>
-      </div>
-    </div><!--/.col-xs-6.col-lg-4-->
-  </div><!--/row-->
-</div>
+  <div class="jumbotron">
+    <div class="container">
+      <h1 id="team1">Познакомся с нашей командой!</h1>
+    </div>
+  </div>    
+  <div class="container marketing">
+    <h3 id="team2">Именно они будут твоими проводниками в IT</h3>  <!-- Three columns of text below the carousel -->
+    <div class="row">
+      <div class="col-lg-4">
+        <img class="img-circle" src="{% static 'images/pavel.jpg' %}" alt="Generic placeholder image" width="140" height="140">
+        <h2 id="founder">Founder</h2>
+        <p class="name">Name: Павел Обод</p>
+        <p>Skype: azaless</p>
+        <p>Email: itbursa100@gmail.com</p>
+        <p>Phone: +38-096-469-15-57</p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img class="img-circle" src=".{% static 'images/alena.jpg' %}" alt="Generic placeholder image" width="140" height="140">
+        <h2 id="manager">Manager</h2>
+        <p class="name">Name: Алена Чайка</p>
+        <p>Skype: alena.itbursa</p>
+        <p>Email: alena.itbursa@gmail.com</p>
+        <p>Phone: +38-063-625-07-55</p>
+        
+        </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img class="img-circle" src="{% static 'images/daria.jpg' %}" alt="Generic placeholder image" width="140" height="140">
+        <h2 id="director">Director</h2>
+        <p class="name">Name: Дария Михалевич</p>
+        <p>Skype: darka.darka.darka.darka</p>
+        <p>Email: daria.mychalevych@gmail.com</p>
+        <p>Phone: +38-096-469-15-57</p>
+      </div><!-- /.col-lg-4 -->
+    </div>
+  </div>
+  </div>
+  <div class="alert alert-warning" role="alert">Поторопись!</div><!-- /.row -->
 {% endblock content %}
+ 

@@ -1,6 +1,6 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from courses.models import Course
-
 
 class Student(models.Model):
     name = models.CharField(max_length=255)
@@ -11,7 +11,6 @@ class Student(models.Model):
     address = models.CharField(max_length=255)
     skype = models.CharField(max_length=255)
     courses = models.ManyToManyField(Course)
-
-    def __str__(self):
-        return u'{} {}'.format(self.name, self.surname)
+    
+    
 
