@@ -27,7 +27,7 @@ def create(request):
         if form.is_valid():
             student = form.save()
             messages.success(request, u'Студент {} {} успешно добавлен.'.format(student.name, student.surname))
-            return redirect('students:list')
+            return redirect('students:list_view')
     else:
         form = StudentModelForm()
     return render(request, 'students/add.html', {'form': form})
@@ -51,6 +51,6 @@ def remove(request, pk):
     if request.method == "POST":
         student.delete()
         messages.success(request, u'Студент {} {} был удален.'.format(student.name, student.surname))
-        return redirect('students:list')
+        return redirect('students:list_view')
     return render(request, 'students/remove.html', {'student': student})
 
