@@ -8,7 +8,7 @@ from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 import logging
 
 from .forms import LessonModelForm, CourseModelForm
-from .models import Course
+from .models import Course, Lesson
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +18,17 @@ class CourseDetailView(DetailView):
     fields = '__all__'
     template_name = 'courses/detail.html'
     context_object_name = 'course'
+
+    def get_context_data(self, **kwargs):
+
+        logger.debug('Courses detail view has been debugged!')
+        logger.info('Logger of courses detail view informs you!')
+        logger.warning('Logger of courses detail view warns you!')
+        logger.error('Courses detail view went wrong!')
+        
+        context = super(CourseDetailView, self).get_context_data(**kwargs)
+        context['lessons'] = Lesson.objects.filter(course=self.get_object().pk)
+        return context
 
 
 class CourseCreateView(CreateView):
@@ -30,15 +41,8 @@ class CourseCreateView(CreateView):
     success_url = reverse_lazy('index')
 
     def get_context_data(self, **kwargs):
-
-        logger.debug('Courses detail view has been debugged')
-        logger.info('Logger of courses detail view informs you!')
-        logger.warning('Logger of courses detail view warns you!')
-        logger.error('Courses detail view went wrong!')
-
         context = super(CourseCreateView, self).get_context_data(**kwargs)
         context['title'] = "Course creation"
-
         return context
 
     def form_valid(self, form):
