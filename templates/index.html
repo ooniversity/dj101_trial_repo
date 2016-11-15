@@ -1,39 +1,54 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
 
-{% block title %}Главная - pyBursa{% endblock %}
+{% block title %}Pybursa Main{% endblock %}
 
-
-{% block nav_index %}active{% endblock %}
-
+{% block selected_main %}selected{% endblock %}
 
 {% block content %}
-<div class="jumbotron">
-  <h1>ooniversity</h1>
-  <p>Мы специализируемся на «модных» языках программирования. Принципиальное наше отличие от других курсов – максимум практики и жесткая система обязательных домашних заданий.</p>
-</div>
-<div class="page-header">
-  <h1>Выбирай на каком курсе ты хочешь учиться!</h1>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Курс</th>
-          <th>Описание</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for course in courses %}
-          <tr>
-            <td><a href="{% url 'courses:detail' course.id %}">{{ course.name|upper }}</a></td>
-            <td>{{ course.short_description|truncatechars:70 }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
+	    <div class=main-header>
+		<!--<img style="z-index:1" src={% static 'images/index.jpg'%}/>-->
+		{% if messages %}
+		<div class="alert alert-success alert-dismissible glow_cyan" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    		{% for message in messages %}
+    		    {{ message }}
+    		{% endfor %}
+		</div>
+		{% endif %}
+		<h1 class="org_name">Jedi Academy</h1>
+		<a href=#>Enroll for the course</a>
+		<h1 class="org_name force">May the <b>Force</b> be with you</h1>
+	    </div>
+	    <div class=container>
+	    	<h1 class="glow_cyan_t">Jedi Academy Courses, choose the side</h1>
+		<p class="add_button"><a href="{% url 'courses:add' %}" class="glow_cyan">Add a new course</a></p>
+	    	<table class="stud_table glow_cyan no_margin">
+		    <thead>
+		       <tr>
+		    	    <th>Course</th>
+		    	    <th>Description</th>
+		    	    <th></th><th></th>
+		       </tr>
+		    </thead>
+		    <tbody>
+		    {% for course in courses %}
+		       <tr>
+		    	    <td><a href="{% url 'courses:detail' course.pk %}">{{ course|upper }}</a></td>
+			    <td>{{ course.short_description|title }}</td>
+
+			    <td class="table_center"><a href="{% url 'courses:edit' course.pk %}" class="btn btn-info">
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a></td>
+
+			    <td class="table_center"><a href="{% url 'courses:remove' course.pk %}" class="btn btn-info">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a></td>
+		       <tr>
+		    {% endfor %}
+		    </tbody>
+	        </table>
+	    </div>
 {% endblock content %}
+
+{% block footer %}footer{% endblock %}
 
