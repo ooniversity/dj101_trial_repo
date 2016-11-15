@@ -1,28 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}{{ title }}{% endblock %}
 
-{% block selected_students %}selected{% endblock %}
+{% block title %}Удаление студента - pyBursa{% endblock %}
+
+
+{% block nav_students %}active{% endblock %}
+
 
 {% block content %}
-        <div class="container">
-	<br>
-	{% if messages %}
-	    {% for message in messages %}
-	    <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %} alert-dismissible" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		{{ message }}
-	    </div>
-	    {% endfor %}
-	{% endif %}
-	<center><h1 class="glow_cyan_t">Are you sure to remove {{ student.name }} {{ student.surname }}?</h1></center>
-	<center>
-		<form method="post">
-			{% csrf_token %}
-			<input type="submit" value="Confirm" />
-		</form>
-	</center>
-    	</div>
+<div class="page-header">
+  <h2>{{ title }}</h2>
+  <!--<h4>Студент {{ student.name }} {{ student.surname }} будет удален</h4>-->
+</div>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Удалить">
+  </form>
 {% endblock content %}
-
-{% block footer %}"footer atbottom"{% endblock %}

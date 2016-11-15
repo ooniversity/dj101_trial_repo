@@ -1,7 +1,9 @@
-from django.conf.urls import patterns, include, url
-from django.contrib import admin
-from coaches import views
+from django.conf.urls import url
 
-urlpatterns = patterns('',
-	url(r'(?P<coach_id>[0-9]+)/$', views.detail, name = "detail" )
-)
+from . import views
+
+
+urlpatterns = [
+    url(r'^(?P<pk>\d+)/$', views.detail, name='detail'),
+]
+

@@ -1,53 +1,66 @@
 {% extends "base.html" %}
 
-{% load staticfiles %}
 
-{% block title %}{{ course }} Description{% endblock %}
+{% block title %}Сведенья о курсе - pyBursa{% endblock %}
 
-{% block selected_main %}selected{% endblock %}
+{% block students_course %}?course_id={{ course.pk }}{% endblock %}
 
-{% block course %}?course_id={{ course.id }}{% endblock %}
 
 {% block content %}
-	    <div class=main-header>
-		<img src = {% static 'images/index.jpg'%}/>
-		{% if messages %}
-		<div class="alert alert-success alert-dismissible glow_cyan" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    		{% for message in messages %}
-    		    {{ message }}
-    		{% endfor %}
-		</div>
-		{% endif %}
-		<h1 class="org_name">{{ course }}</h1>
-		<h3 class="org_name">{{ course.description|truncatechars:32 }}</h3>
-	    </div>	
-	    <div class=container>
-	       <h1 class="glow_cyan_t">{{ course }} Trainers</h1>
-           {% if course.coach %}
-	       {% include "include/instructor_include.html" with block_title="Trainer" instructor=course.coach %}
-           {% endif %}
-		<br/>
-           {% if course.assistant %}
-	       {% include "include/instructor_include.html" with block_title="Assistant" instructor=course.assistant %}
-           {% endif %}
-	       <h1 class="glow_cyan_t">{{ course }}, lessons:</h1>
-	       <p class="add_button"><a href="{% url 'courses:add-lesson' course.id %}" class="glow_cyan">Add a new lesson</a></p>
-	       <table class="stud_table glow_cyan no_margin">
-		  <thead>
-		    <tr>
-		    <th>#</th><th>Topic</th><th>Description</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		  {% for lesson in lessons %}
-		  <tr>
-		   <td>{{ lesson.order }}</td><td>{{ lesson }}</td><td>{{ lesson.description }}</td>
-		  </tr>
-		  {% endfor %}
-		  </tbody>
-	       </table>
-	    </div>
-{% endblock content %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
 
-{% block footer %}footer{% endblock %}
+<div class="jumbotron">
+  <h1>{{ course.name }}</h1>
+  <p>{{ course.description }}</p>
+</div>
+
+<div class="page-header">
+  <h1>Преподаватели</h1>
+</div>
+  {% if course.coach %}
+    {% include "include/coach_include.html" with title="Учитель" coach=course.coach %}
+  {% endif %}
+
+  {% if course.assistant %}
+    {% include "include/coach_include.html" with title="Ассистент" coach=course.assistant %}
+  {% endif %}
+
+<div class="page-header">
+  <h1>План курса</h1>
+</div>
+
+<a href="{% url 'courses:add-lesson' course.pk %}" class="btn btn-primary" role="button">
+  <span class="glyphicon glyphicon-plus"></span>
+  Добавить занятие
+</a>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Тема</th>
+          <th>Описание</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for lesson in course.lesson_set.all %}
+          <tr>
+            <td>{{ lesson.order }}</td>
+            <td>{{ lesson.subject }}</td>
+            <td>{{ lesson.description }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

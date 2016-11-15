@@ -1,29 +1,26 @@
 {% extends "base.html" %}
 
-{% block title %}{{ title }}{% endblock %}
 
-{% block selected_main %}selected{% endblock %}
+{% block title %}Редактирование курса - pyBursa{% endblock %}
+
 
 {% block content %}
-	<br>
-        <div class="container at_center">
-	{% if messages %}
-	<div class="alert alert-success alert-dismissible glow_cyan" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		{% for message in messages %}
-        		{{ message }}
-		{% endfor %}
-	</div>
-	{% endif %}
-	<h1 class="glow_cyan_t">{{ title }}</h1>
-		<form method="post">
-			{% csrf_token %}
-			<table>
-			{{ form.as_table }}
-			</table>
-			<input type="submit" value="Save changes" />
-		</form>
-    	</div>
-{% endblock content %}
 
-{% block footer %}"footer atbottom"{% endblock %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+<div class="page-header">
+  <h2>{{ title }}</h2>
+</div>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Изменить">
+  </form>
+{% endblock content %}

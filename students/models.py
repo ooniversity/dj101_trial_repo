@@ -1,18 +1,17 @@
 from django.db import models
-from django.shortcuts import redirect
-from django.core.urlresolvers import reverse
+from courses.models import Course
 
-# Create your models here.
 
 class Student(models.Model):
-    name = models.CharField(max_length = 100)
-    surname = models.CharField(max_length = 100)
+    name = models.CharField(max_length=255)
+    surname = models.CharField(max_length=255)
     date_of_birth = models.DateField()
     email = models.EmailField()
-    phone = models.CharField(max_length = 30)
-    address = models.CharField(max_length = 255)
-    skype = models.CharField(max_length = 255)
-    courses = models.ManyToManyField('courses.Course')
+    phone = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    skype = models.CharField(max_length=255)
+    courses = models.ManyToManyField(Course)
 
-    def get_absolute_url(self):
-	return reverse('students:list_view')
+    def __str__(self):
+        return u'{} {}'.format(self.name, self.surname)
+

@@ -1,46 +1,63 @@
 {% extends "base.html" %}
-
 {% load staticfiles %}
 
-{% block title %}{{ student.name }} {{ student.surname }} Details{% endblock %}
+{% block title %}Сведения о студенте - pyBursa{% endblock %}
 
-{% block selected_students %}selected{% endblock %}
+
+{% block nav_students %}active{% endblock %}
+
 
 {% block content %}
-        <div class=container>
-	    <div class=c_photo>
-		<h1 class="glow_cyan_t">{{ student.name }} {{ student.surname }}</h1>
-		<img class="glow_cyan img-circle" src="{% static 'images/unknown.jpg' %}"/>
-	    </div>
-	    <div class="c_contacts score_table">
-		<table class="stud_table glow_cyan">
-		    <tr>
-			<td>Surname</td><td>{{ student.surname }}</td>
-		    </tr>
-		    <tr>
-			<td>Name</td><td>{{ student.name }}</td>
-		    </tr>
-		    <tr>
-			<td>E-mail</td><td>{{ student.email }}</td>
-		    </tr>
-		    <tr>
-			<td>Phone</td><td>{{ student.phone }}</td>
-		    </tr>
-		    <tr>
-			<td>Birth Date</td><td>{{ student.date_of_birth }}</td>
-		    </tr>
-		    <tr>
-			<td>Address</td><td>{{ student.address }}</td>
-		    </tr>
-		    <tr>
-		        <td>Skype</td><td>{{ student.skype }}</td>
-		    </tr>
-		    <tr>
-			<td>Courses</td><td>{% for course in student.courses.all %}<a href="{% url 'courses:detail' course.id %}">{{ course }}</a><br>{% endfor %}</td>
-		    </tr>
-		</table>
-	    </div>
-	</div>
-{% endblock content %}
+<div class="page-header">
+  <h2>{{ student.name }} {{ student.surname }}</h2>
+</div>
 
-{% block footer %}"footer atbottom"{% endblock %}
+<div class="row">
+  <div class="col-xs-12 col-lg-12">
+    <div class="row">
+      <div class="col-xs-4 col-lg-4 ">
+        <table class="table">
+          <thead>
+            <tr>
+              <td>дата рождения</td>
+              <td>{{ student.date_of_birth|date:"d F, Y" }}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>адрес</td>
+              <td>{{ student.address }}</td>
+            </tr>
+            <tr>
+              <td>почта</td>
+              <td>{{ student.email }}</td>
+            </tr>
+            <tr>
+              <td>логин skype</td>
+              <td>{{ student.skype }}</td>
+            </tr>
+            <tr>
+              <td>телефон</td>
+              <td>{{ student.phone }}</td>
+            </tr>
+            <tr>
+              <td>курсы</td>
+              <td>
+                {% for course in student.courses.all %}
+                  <p><a href="{% url 'courses:detail' course.pk %}">{{ course.name }}</a></p>
+                {% endfor %}
+              </td>
+            </tr>
+            <tr>
+              <td>комментарии</td>
+              <td>
+                {{ comment|default:"не имеет комментарий" }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,17 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}{{ title }}{% endblock %}
 
-{% block selected_main %}selected{% endblock %}
+{% block title %}Удаление курса - pyBursa{% endblock %}
+
 
 {% block content %}
-        <div class="container at_center">
-	<h1 class="glow_cyan_t">Are you sure to remove {{ course.name }}?</h1>
-		<form method="post">
-			{% csrf_token %}
-			<input type="submit" value="Confirm" />
-		</form>
-    	</div>
+<div class="page-header">
+  <h2>{{ title }}</h2>
+</div>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Удалить">
+  </form>
 {% endblock content %}
-
-{% block footer %}"footer atbottom"{% endblock %}

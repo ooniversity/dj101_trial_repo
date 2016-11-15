@@ -1,49 +1,80 @@
 {% extends "base.html" %}
 
-{% load staticfiles %}
 
-{% block title %}{{ coach.user.first_name }} {{ coach.user.last_name }} Details{% endblock %}
+{% block title %}Сведения о преподавателе - pyBursa{% endblock %}
 
-{% block selected_main %}selected{% endblock %}
 
 {% block content %}
-        <div class=container>
-	    <div class=c_photo>
-		<h1 class="glow_cyan_t">{{ coach.user.first_name }} {{ coach.user.last_name }}</h1>
-		<img class="glow_cyan img-circle" src="{% static 'images/unknown.jpg' %}"/>
-	    </div>
-	    <div class="c_contacts score_table">
-		<table class="stud_table glow_cyan">
-		    <tr>
-			<td>Surname</td><td>{{ coach.user.last_name }}</td>
-		    </tr>
-		    <tr>
-			<td>Name</td><td>{{ coach.user.first_name }}</td>
-		    </tr>
-		    <tr>
-			<td>E-mail</td><td>{{ coach.user.email }}</td>
-		    </tr>
-		    <tr>
-			<td>Phone</td><td>{{ coach.phone }}</td>
-		    </tr>
-		    <tr>
-			<td>Birth Date</td><td>{{ coach.date_of_birth|date:"d F, Y" }}</td>
-		    </tr>
-		    <tr>
-			<td>Address</td><td>{{ coach.address }}</td>
-		    </tr>
-		    <tr>
-		        <td>Skype</td><td>{{ coach.skype }}</td>
-		    </tr>
-		    <tr>
-			<td>Courses Trainer</td><td>{% for course in course_coach %}<a href="{% url 'courses:detail' course.id %}">{{ course }}</a> Course students: <a href="{% url 'students:list_view' %}?course_id={{ course.id }}"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></a><br>{% endfor %}</td>
-		    </tr>
-		    <tr>
-			<td>Course Assistant</td><td>{% for course in course_assistant %}<a href="{% url 'courses:detail' course.id %}">{{ course }}</a> Course students: <a href="{% url 'students:list_view' %}?course_id={{ course.id }}"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></a><br>{% endfor %}</td>
-		    </tr>
-		</table>
-	    </div>
-	</div>
+<div class="page-header">
+  <h2>{{ coach.user.first_name }} {{ coach.user.last_name }}</h2>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-lg-12">
+    <div class="row">
+      <div class="col-xs-12 col-lg-12 ">
+        <table class="table">
+          <thead>
+            <tr>
+              <td>дата рождения</td>
+              <td>{{ coach.date_of_birth|date:"d F, Y" }}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>адрес</td>
+              <td>{{ coach.address }}</td>
+            </tr>
+            <tr>
+              <td>почта</td>
+              <td>{{ coach.user.email }}</td>
+            </tr>
+            <tr>
+              <td>логин skype</td>
+              <td>{{ coach.skype }}</td>
+            </tr>
+            <tr>
+              <td>телефон</td>
+              <td>{{ coach.phone }}</td>
+            </tr>
+            <tr>
+              <td>курсы учитель</td>
+              <td>
+                {% for course in coach.coach_courses.all %}
+                  <p>
+                    <a href="{% url 'courses:detail' course.id %}">{{ course.name }}</a>
+                    cтуденты курса
+                    <a href="{% url 'students:list_view' %}?course_id={{ course.id }}">
+                      <span class="glyphicon glyphicon-new-window"></span>
+                    </a>
+                  </p>
+                {% empty %}
+                  нет курсов
+                {% endfor %}
+              </td>
+            </tr>
+            <tr>
+              <td>курсы ассистент</td>
+              <td>
+                {% for course in coach.assistant_courses.all %}
+                  <p>
+                    <a href="{% url 'courses:detail' course.id %}">{{ course.name }}</a>
+                    cтуденты курса
+                    <a href="{% url 'students:list_view' %}?course_id={{ course.id }}">
+                      <span class="glyphicon glyphicon-new-window"></span>
+                    </a>
+                  </p>
+                {% empty %}
+                  нет курсов
+                {% endfor %}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}
 
-{% block footer %}"footer atbottom"{% endblock %}
+
