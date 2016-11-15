@@ -1,51 +1,15 @@
 {% extends "base.html" %}
 
-{% load staticfiles %}
+{% block title %}Pybursa Contacts{% endblock %}
 
-
-{% block title %}PyBursa contacts{% endblock title %}
-
-
-{% block blow_contact %}active{% endblock blow_contact %}
-
+{% block selected_contacts %}selected{% endblock %} 
 
 {% block content %}
-  <div class="jumbotron">
-    <div class="container">
-      <h1 id="team1">Познакомся с нашей командой!</h1>
-    </div>
-  </div>    
-  <div class="container marketing">
-    <h3 id="team2">Именно они будут твоими проводниками в IT</h3>  <!-- Three columns of text below the carousel -->
-    <div class="row">
-      <div class="col-lg-4">
-        <img class="img-circle" src="{% static 'images/pavel.jpg' %}" alt="Generic placeholder image" width="140" height="140">
-        <h2 id="founder">Founder</h2>
-        <p class="name">Name: Павел Обод</p>
-        <p>Skype: azaless</p>
-        <p>Email: itbursa100@gmail.com</p>
-        <p>Phone: +38-096-469-15-57</p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <img class="img-circle" src=".{% static 'images/alena.jpg' %}" alt="Generic placeholder image" width="140" height="140">
-        <h2 id="manager">Manager</h2>
-        <p class="name">Name: Алена Чайка</p>
-        <p>Skype: alena.itbursa</p>
-        <p>Email: alena.itbursa@gmail.com</p>
-        <p>Phone: +38-063-625-07-55</p>
-        
-        </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <img class="img-circle" src="{% static 'images/daria.jpg' %}" alt="Generic placeholder image" width="140" height="140">
-        <h2 id="director">Director</h2>
-        <p class="name">Name: Дария Михалевич</p>
-        <p>Skype: darka.darka.darka.darka</p>
-        <p>Email: daria.mychalevych@gmail.com</p>
-        <p>Phone: +38-096-469-15-57</p>
-      </div><!-- /.col-lg-4 -->
-    </div>
-  </div>
-  </div>
-  <div class="alert alert-warning" role="alert">Поторопись!</div><!-- /.row -->
+	<div class=container>
+	    {% include "include/contact_include.html" with photo='images/director.png' name="Chubakka" position='Director' skype="aaarghd!" email="chubakka_soft@rebels.com" phone="-" %}
+	    {% include "include/contact_include.html" with photo='images/manager.png' name="Imperial Trooper" position='Manager' skype="save_our_souls" email="storm_trooper_1999244@imperium.com" phone="+1(555)-kill-rebels" %}
+	    {% include "include/contact_include.html" with photo='images/r2d2.jpg' name="R2D2" position='Founder' skype="r2d2_ma3a_tr3ad" email="r2d2@star-wars.com" phone="+981(1237)15-15-12-r2d2" %}
+	</div>
 {% endblock content %}
- 
+
+{% block footer %}footer{% endblock %}

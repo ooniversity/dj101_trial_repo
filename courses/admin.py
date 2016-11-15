@@ -1,22 +1,20 @@
-
 from django.contrib import admin
 from courses.models import Course, Lesson
-from django.forms import widgets
-from coaches.models import Coach
-# -*- coding: utf-8 -*-
+
+
 class LessonInline(admin.TabularInline):
-    extra = 0
     model = Lesson
-    fields = ['subject', 'description', 'order']
+    fields = [ 'subject', 'description' , 'order' ]
+    extra = 0
+
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ['name',  'short_description']
-    search_fields = ['name']
-    inlines = [LessonInline]
+    list_display = [ 'name', 'short_description' ]
+    fields = [ 'name', 'short_description', 'description' , 'coach' , 'assistant']
+    search_fields = [ 'name' ]
+    inlines = [ LessonInline ]
 
-    
-
-
-
-
+# Register your models here.
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Lesson)
+
+

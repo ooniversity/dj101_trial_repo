@@ -1,77 +1,53 @@
 {% extends "base.html" %}
 
-
 {% load staticfiles %}
 
+{% block title %}{{ course }} Description{% endblock %}
 
-{% block title %}PyBursa{% endblock title %}
+{% block selected_main %}selected{% endblock %}
 
-
-{% block spec_link %}?course_id={{ course.id }}{% endblock spec_link %}
-
+{% block course %}?course_id={{ course.id }}{% endblock %}
 
 {% block content %}
+	    <div class=main-header>
+		<img src = {% static 'images/index.jpg'%}/>
+		{% if messages %}
+		<div class="alert alert-success alert-dismissible glow_cyan" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    		{% for message in messages %}
+    		    {{ message }}
+    		{% endfor %}
+		</div>
+		{% endif %}
+		<h1 class="org_name">{{ course }}</h1>
+		<h3 class="org_name">{{ course.description|truncatechars:32 }}</h3>
+	    </div>	
+	    <div class=container>
+	       <h1 class="glow_cyan_t">{{ course }} Trainers</h1>
+           {% if course.coach %}
+	       {% include "include/instructor_include.html" with block_title="Trainer" instructor=course.coach %}
+           {% endif %}
+		<br/>
+           {% if course.assistant %}
+	       {% include "include/instructor_include.html" with block_title="Assistant" instructor=course.assistant %}
+           {% endif %}
+	       <h1 class="glow_cyan_t">{{ course }}, lessons:</h1>
+	       <p class="add_button"><a href="{% url 'courses:add-lesson' course.id %}" class="glow_cyan">Add a new lesson</a></p>
+	       <table class="stud_table glow_cyan no_margin">
+		  <thead>
+		    <tr>
+		    <th>#</th><th>Topic</th><th>Description</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  {% for lesson in lessons %}
+		  <tr>
+		   <td>{{ lesson.order }}</td><td>{{ lesson }}</td><td>{{ lesson.description }}</td>
+		  </tr>
+		  {% endfor %}
+		  </tbody>
+	       </table>
+	    </div>
+{% endblock content %}
 
-{% if messages %}
- 
-<div class="alert alert-warning alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{% for message in messages %}{{ message }}{% endfor %}</div>
-{% endif %}
-  <div>
-    <button class="btn"><a href="{% url 'courses:add-lesson' course.id %}">Добавить занятие</a></button>
-  </div>
-    <div class="jumbotron">
-      <div class="container">
-        <div class="page-header">
-        </div>
-      </div> 
-    </div> 
-    <h1>{{ course }}</h1>
-    <h3>{{ course.description|truncatechars:32 }}<h3> 
-    <h2>План курса</h2>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Тема</th>
-          <th>Описание</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for lesson in lessons %}
-          <tr>
-           <td>{{ lesson.order }}</td>
-           <td>{{ lesson.subject }}</td>
-           <td>{{ lesson.description }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Учитель</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="{% url 'coaches:detail' course.coach.id %}">{{ course.coach.first_name }} {{ course.coach.last_name }}</a></td>
-          <td>{{ course.coach.description }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Ассистент</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="{% url 'coaches:detail' course.assistant.id %}">{{ course.assistant.first_name }} {{ course.assistant.last_name }}</a></td>
-          <td>{{ course.assistant.description }}</td>
-        </tr>
-      </tbody>
-    </table>
-{% endblock content %}    
-    
+{% block footer %}footer{% endblock %}

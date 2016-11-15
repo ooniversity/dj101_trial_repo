@@ -1,85 +1,78 @@
 {% extends "base.html" %}
 
+{% block title %}Pybursa Students{% endblock %}
 
-{% load staticfiles %}
-
-
-{% block title %}PyStudents{% endblock title %}
-
-
-
-
+{% block selected_students %}selected{% endblock %}
 
 {% block content %}
-  {% if messages %}
-        <div class="alert alert-info alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            {% for message in messages %}{{ message }}{% endfor %}
-        </div>
-    {% endif %}
-  <div>
-    <button class="btn"><a href="{% url 'students:add' %}">Добавить нового студента</a></button>
-  </div>
-  <div class="jumbotron">
-    <div class="container">
-      <h1>Список студентов</h1>
+        <div class=container>
+	     {% if messages %}
+		<br>
+		<div class="alert alert-success alert-dismissible glow_cyan" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    		{% for message in messages %}
+    		{{ message }}
+    		{% endfor %}
+		</div>
+		{% endif %}
+	     <h1 class="glow_cyan_t">Enrolled Students to Jedi Academy</h1>
+	     <span class="glow_red_t t_red">Below you can see a list of PyBursa students graduated in April 2015</span>
+	     <p class="add_button"><a href="{% url 'students:add' %}" class="glow_cyan">Add a new student</a></p>
+         {% if object_list %}
+	     <table class="stud_table no_margin glow_cyan">
+       		
+        <thead>
+		    <tr>
+	    		<th>#</th>
+			<th>Fullname</th>
+			<th>Address</th>
+			<th>Skype</th>
+			<th>Courses</th>
+			<th></th>
+			<th></th>
+		    </tr>
+		</thead>
+		<tbody>
+		    {% for student in object_list %}
+		    <tr>
+			<td>{{ student.id }}</td>
+			<td><a href="{% url 'students:detail' student.id %}">{{ student.surname }} {{ student.name }}<a></td>
+			<td>{{ student.address }}</td>
+			<td>{{ student.skype }}</td>
+			<td>{% for course in student.courses.all %}<a href="{% url 'courses:detail' course.id %}">{{ course.name }}</a><br>{% endfor %}</td>
+			<td class="table_center"><a href="{% url 'students:edit' student.id %}" class="btn btn-info"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a></td>
+			<td class="table_center"><a href="{% url 'students:remove' student.id %}" class="btn btn-info"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a></td>
+		    </tr>
+		    {% endfor %}
+		</tbody>
+	     </table>
+		<br />
+		<div class="at_right">
+		<div class="pagina glow_cyan">
+		<ul class="pagination">
+	        {% if page_obj.has_previous %}
+		    <li>
+    	    		<a href="?{% if request.GET.course_id %}course_id={{ request.GET.course_id }}&{% endif %}page={{ page_obj.previous_page_number }}"><< previous</a>
+		    </li>
+    		{% endif %}
+		    <li>
+        		<a>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+		    </li>
+	        {% if page_obj.has_next %}
+		    <li>
+    			<a href="?{% if request.GET.course_id %}course_id={{ request.GET.course_id }}&{% endif %}page={{ page_obj.next_page_number }}">next >></a>
+		    </li>
+	        {% endif %}
+		</ul>
+        {% else %}
+        <h3 class="glow_cyan_t">Unfortunately there is no students in this course or course not found</h3>
+        {% endif %}
+		</div>
+		</div>
+    </span>
+</div>
+	</div>
+{% endblock content %}
 
-    </div>
-  </div>
-  
-  
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Фамилия и имя</th>
-        <th>Адрес</th>
-        <th>Skype</th>
-        <th>курсы</th>
-        
-      </tr>
-    </thead>
-    <tbody>
-    {% for student in student_list %}
-      <tr>
-        <td>{{ student.id }}</td>
-        <td><a href="{% url 'students:detail' student.id %}">{{ student.name }} {{ student.surname }}</a></td>
-        <td>{{ student.address }}</td>
-        <td>{{ student.skype }}</td>
-        <td>
-            {% for course in student.courses.all %}
-                <p><a href="{% url 'courses:detail' course.id %}">{{ course }}</a></p>
-            {% endfor %} 
-        </td>
-        <td>
-            <button class="btn"><a href="{% url 'students:edit' student.id %}">Изменить</a></button>
-        </td>
-        <td>
-            <button class="btn"><a href="{% url 'students:remove' student.id %}">Удалить</a></button>
-        </td>       
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-<nav>
-  <ul class="pagination">
-   
-        {% if page_obj.has_previous %}
-          <li><a href="?page={{ page_obj.previous_page_number }}"><< previous</a></li>
-        {% endif %}
-        {% for page in page_obj.paginator.page_range %}
-            {% if page == page_obj.number %}
-                <li class="active"><a href="?page={{ page }}">{{ page }}</a></li>
-            
-            {% else %}
-                <li class='disabled'><a href="?page={{ page }}">{{ page }}</a></li>
-            {% endif %}
-        {% endfor %}
-        {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}">next >></a></li>
-        {% endif %}
-    
-  </ul>
-</nav>
-{% endblock content %}  
-    
+{% block footer %}"footer atbottom"{% endblock %}
+
