@@ -28,7 +28,7 @@ SECRET_KEY = 'hbt+3tk2pbmwsv74d@%uvb5x19%(9t25jhhsv0m&r%akuw_#^='
 DEBUG = False                   # ########### for task 12_1 ########### #
 
 ALLOWED_HOSTS = ['*']   # ########### for task 12_1 ########### #
-
+# ALLOWED_HOSTS = ['localhost']    # TODO uncomment to provoke the 500 error
 
 # Application definition
 
