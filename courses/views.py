@@ -11,7 +11,9 @@ from .models import Course
 
 class CourseDetailView(DetailView):
     model = Course
+    fields = '__all__'
     template_name = 'courses/detail.html'
+    context_object_name = 'course'
 
 
 class CourseCreateView(CreateView):
@@ -45,7 +47,7 @@ class CourseUpdateView(UpdateView):
     fields = '__all__'  # to avoid ImproperlyConfigured error
     template_name = 'courses/edit.html'
     context_object_name = 'form'
-    success_url = reverse_lazy('index')
+    # success_url = reverse_lazy('index')
     # success_url = '/courses/edit/%(id)d/'
 
     def get_context_data(self, **kwargs):
@@ -56,7 +58,7 @@ class CourseUpdateView(UpdateView):
     def form_valid(self, form):
         data = form.instance
         messages.success(self.request, 'The changes have been saved.')
-        # self.success_url = reverse_lazy('courses:edit', args=(data.id,))
+        self.success_url = reverse_lazy('courses:edit', args=(data.id,))
         return super(CourseUpdateView, self).form_valid(form)
 
     # def form_valid(self, form):
