@@ -38,7 +38,7 @@
           <tr>
             <td>{{ lesson.order }}</td>
             <td>{{ lesson.subject }}</td>
-            <td>{{ lesson.description }}</td>
+            <td>{{ lesson.description|truncatechars:31 }}</td>
           </tr>
         {% endfor %}
       </tbody>
