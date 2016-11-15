@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Студенты - pyBursa</title>
+    <title>{% block title %}{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -37,66 +37,28 @@
             <img class="logo" src="{% static 'img/logo.png' %}" />
           </a>
         </div>
+
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="{% url 'index' %}">Главная</a></li>
-            <li><a href="{% url 'contact' %}">Контакты</a></li>
-            <li><a href="{% url 'student_list' %}">Студенты</a></li>
+            <li class="{% block nav_index %}{% endblock %}">
+              <a href="{% url 'index' %}">Главная</a>
+            </li>
+            <li class="{% block nav_contact %}{% endblock %}">
+              <a href="{% url 'contact' %}">Контакты</a>
+            </li>
+            <li class="{% block nav_students %}{% endblock %}">
+              <a href="{% url 'students:list_view' %}{% block students_course %}{% endblock %}">Студенты</a>
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
+
       </div>
     </nav>
 
     <div class="container theme-showcase" role="main">
 
-      <div class="page-header">
-        <h2>Список студентов</h2>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Surname Name</th>
-                <th>Address</th>
-                <th>Skype</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td><a href="{% url 'student_detail' %}">Петров Петр</a></td>
-                <td>Харьков ул.Петровского 12</td>
-                <td>pety.pety</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td><a href="{% url 'student_detail' %}">Иванов Иван</a></td>
-                <td>Харьков ул.Иванова 34</td>
-                <td>vano.vano</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td><a href="{% url 'student_detail' %}">Сидорова Ира</a></td>
-                <td>Киев ул.Сидорова 37</td>
-                <td>ira.ira</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td><a href="{% url 'student_detail' %}">Бондаренко Екатерина</a></td>
-                <td>Харьков ул.Сумская 101</td>
-                <td>katy.katy</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td><a href="{% url 'student_detail' %}">Бондаренко Сергей</a></td>
-                <td>Харьков ул.Сумская 101</td>
-                <td>sergey.sergey</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      {% block content %}{% endblock content %}
+
     </div> <!-- /container -->
 
 
